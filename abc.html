@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form Validation</title>
+  <style>
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <form id="myForm">
+    <div>
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName">
+      <span id="firstNameError" class="error"></span>
+    </div>
+    <div>
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName">
+      <span id="lastNameError" class="error"></span>
+    </div>
+    <div>
+      <label for="phoneNumber">Phone Number:</label>
+      <input type="text" id="phoneNumber" name="phoneNumber">
+      <span id="phoneNumberError" class="error"></span>
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email">
+      <span id="emailError" class="error"></span>
+    </div>
+    <div>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password">
+      <span id="passwordError" class="error"></span>
+    </div>
+    <div>
+      <input type="checkbox" id="terms" name="terms">
+      <label for="terms">I agree to the given Terms and Conditions.</label>
+      <span id="termsError" class="error"></span>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    // Function to validate the form
+    function validateForm(event) {
+      event.preventDefault();
+
+      // Clear previous error messages
+      clearErrors();
+
+      // Get form inputs
+      var firstNameInput = document.getElementById('firstName');
+      var lastNameInput = document.getElementById('lastName');
+      var phoneNumberInput = document.getElementById('phoneNumber');
+      var emailInput = document.getElementById('email');
+      var passwordInput = document.getElementById('password');
+      var termsInput = document.getElementById('terms');
+
+      // Validate first name
+      if (firstNameInput.value === '') {
+        displayError('firstNameError', 'First name cannot be empty');
+      }
+
+      // Validate last name
+      if (lastNameInput.value === '') {
+        displayError('lastNameError', 'Last name cannot be empty');
+      }
+
+      // Validate phone number
+      var phoneNumberPattern = /^\d{10}$/;
+      if (!phoneNumberPattern.test(phoneNumberInput.value)) {
+        displayError('phoneNumberError', 'Please enter a valid phone number');
+      }
+
+      // Validate email address
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(emailInput.value)) {
+        displayError('emailError', 'Please enter a valid email address');
+      }
+
+      // Validate password
+      var password = passwordInput.value;
+      var hasNumericValue = /\d/.test(password);
+      var hasUppercaseValue = /[A-Z]/.test(password);
+      if (password.length < 8 || !hasNumericValue || !hasUppercaseValue) {
+        displayError('passwordError', 'Please enter a valid password');
+      }
+
+      // Validate terms and conditions checkbox
+      if (!termsInput.checked) {
+        displayError('termsError', 'Please agree to the terms')
+      }
+    
+    (firstName === "") {
+    displayErrorMessage("First Name cannot be empty");
+  }
+
+  if (lastName === "") {
+    displayErrorMessage("Last Name cannot be empty");
+  }
+
+  // If there are no error messages, submit the form
+  if (document.getElementById("errorMessages").innerHTML === "") {
+    // Your code to submit the form or perform further actions
+    alert("Form submitted successfully!");
+  }
+};
